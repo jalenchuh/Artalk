@@ -1,4 +1,4 @@
-name: Build assets
+name: Build
 
 on:
   push:
@@ -6,8 +6,7 @@ on:
       - master
 
 jobs:
-  build-branch-master:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,21 +18,13 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Cache
-        uses: actions/cache@v1
-        env:
-          cache-name: at-node-modules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
-
       - name: Install
-        run: npm install
+        run: yarn install
 
       - name: Build
         run: |
-          npm run lint
-          npm run build
+          yarn lint
+          yarn build
 
       - name: Commit
         env:
@@ -46,42 +37,3 @@ jobs:
           $(date +"%Y-%m-%d %H:%M") \
           "
           git push
-
-
-  build-branch-assets:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: Cache
-        uses: actions/cache@v1
-        env:
-          cache-name: at-node-modules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Install
-        run: npm install
-
-      - name: Build
-        run: |
-          npm run lint
-          npm run build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: assets
-          publish_dir: ./dist
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
