@@ -10,7 +10,6 @@
   @media only screen and (max-width: 768px) {
     & > {
       margin-bottom: @block-margin-mobile;
-      border-radius: 0;
     }
   }
 
@@ -45,7 +44,9 @@
       display: block;
       width: 100%;
       min-height: 130px;
+      max-height: 180px;
       resize: none;
+      font-size: 100%;
       word-wrap: break-word;
       border: none;
       background: var(--at-bg-editor);
@@ -93,9 +94,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       z-index: 2;
-
-      .artalk-text {
-      }
 
       .artalk-cancel {
         pointer-events: all;
@@ -180,7 +178,7 @@
 
     .artalk-send-btn {
       background: @color-main;
-      color: var(--at-font-color);
+      color: #fff;
       border: none;
       padding: 0 30px;
       height: 30px;
