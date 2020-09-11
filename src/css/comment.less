@@ -94,8 +94,11 @@
 
         img {
           max-width: 100%;
-          max-height: 2em;
           vertical-align: middle;
+
+          &[src*="owoEmoji"] {
+            max-height: 2em;
+          }
         }
 
         & > .artalk-content {
