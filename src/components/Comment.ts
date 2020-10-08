@@ -140,7 +140,7 @@ export default class Comment extends ArtalkContext {
   }
 
   getGravatarUrl () {
-    return `${this.artalk.conf.gravatar.cdn}${this.data.email_encrypted}?d=${encodeURIComponent(this.artalk.conf.defaultAvatar)}&s=80`
+    return `${this.artalk.conf.gravatar.cdn}${this.data.email_encrypted}?d=${encodeURIComponent(this.artalk.conf.defaultAvatar)}`
   }
 
   getContentMarked () {
